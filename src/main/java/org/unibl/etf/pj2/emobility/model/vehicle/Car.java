@@ -1,19 +1,49 @@
 package org.unibl.etf.pj2.emobility.model.vehicle;
 
-import org.unibl.etf.pj2.emobility.exceptions.IllegalNumberOfPassengersException;
-
 import java.time.LocalDate;
 
-public class Car extends Vehicle implements IPassengerCarrier{
-    private LocalDate dateOfAcquisition;
+public class Car extends Vehicle implements IMultiPassengerCarrier {
+    private String dateOfAcquisition;
     private String description;
-    private int numberOfPassengers;
+    //private int numberOfPassengers;
 
-    public Car(int id, String producer, String model, double purchasePrice, int currentBatteryLevel, String description, int numberOfPassengers) {
+    public Car(String id, String producer, String model, String dateTime, double purchasePrice, int currentBatteryLevel, String description) {
         super(id, producer, model, purchasePrice, currentBatteryLevel);
         this.description = description;
+        this.dateOfAcquisition = dateTime;
+    }
+
+    public String getDateOfAcquisition() {
+        return dateOfAcquisition;
+    }
+
+    public void setDateOfAcquisition(String dateOfAcquisition) {
+        this.dateOfAcquisition = dateOfAcquisition;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "dateOfAcquisition=" + dateOfAcquisition +
+                ", description='" + description + '\'' +
+                "} " + super.toString();
+    }
+
+    /*
+    public int getNumberOfPassengers() {
+        return numberOfPassengers;
+    }
+
+    public void setNumberOfPassengers(int numberOfPassengers) {
         this.numberOfPassengers = numberOfPassengers;
-        this.dateOfAcquisition=LocalDate.now();
     }
 
     @Override
@@ -28,11 +58,12 @@ public class Car extends Vehicle implements IPassengerCarrier{
 
     @Override
     public void removePassenger() throws IllegalNumberOfPassengersException {
-        if(numberOfPassengers>0){
+        if (numberOfPassengers > 0) {
             numberOfPassengers--;
-        }
-        else{
+        } else {
             throw new IllegalNumberOfPassengersException();
         }
     }
+
+ */
 }
