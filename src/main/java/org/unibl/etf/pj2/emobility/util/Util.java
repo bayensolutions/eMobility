@@ -60,22 +60,7 @@ public class Util {
                     int endY = Integer.parseInt(parts[6].substring(0, parts[6].length() - 2));
                     Coordinate start = new Coordinate(startX, startY);
                     Coordinate end = new Coordinate(endX, endY);
-/*
-                    String startCoordinateString = parts[3]+","+parts[4]; //"0
-                    String startCoordinateEdited = startCoordinateString.substring(1, startCoordinateString.length() - 1);
-                    System.out.println(startCoordinateEdited);
-                    int startX=Integer.parseInt(startCoordinateEdited.split(",")[0]);
-                    System.out.println("x: "+startX);
-                    int startY=Integer.parseInt(startCoordinateEdited.split(",")[1]);
-                    System.out.println("y: "+startY);
-                    Coordinate start = new Coordinate(startX,startY);
 
-                    String endCoordinateString = parts[5]+","+parts[6];
-                    String endCoordinateEdited = endCoordinateString.substring(1, endCoordinateString.length() - 1);
-                    int endX=Integer.parseInt(endCoordinateEdited.split(",")[0]);
-                    int endY=Integer.parseInt(endCoordinateEdited.split(",")[1]);
-                    Coordinate end = new Coordinate(endX,endY);
-*/
                     int duration = Integer.parseInt(parts[7]);
                     boolean failure = "da".equals(parts[8]);
                     boolean discount = "da".equals(parts[9]);
