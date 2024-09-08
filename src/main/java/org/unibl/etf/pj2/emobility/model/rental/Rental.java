@@ -1,23 +1,45 @@
 package org.unibl.etf.pj2.emobility.model.rental;
 
 import org.unibl.etf.pj2.emobility.model.user.User;
+import org.unibl.etf.pj2.emobility.util.Util;
 
 import java.time.LocalDateTime;
+import java.util.Properties;
 
-public class Rental {
+public class Rental extends Thread {
+    private String vehicleID;
     private String dateTime;
     private String userName;
     private Coordinate startCoordinate;
     private Coordinate endCoordinate;
     private double price;
     private long duration;
+    private static int rentalNumber=0;
 
-    public Rental(String dateTime, String userName, Coordinate startCoordinate, Coordinate endCoordinate, long duration) {
+    public Rental(String vehicleID, String dateTime, String userName, Coordinate startCoordinate, Coordinate endCoordinate, long duration) {
+        this.vehicleID=vehicleID;
         this.dateTime = dateTime;
         this.userName = userName;
         this.startCoordinate = startCoordinate;
         this.endCoordinate = endCoordinate;
         this.duration=duration;
+        rentalNumber++;
+    }
+
+    public double calculateRental(){
+        Properties properties= Util.loadProperties();
+        //System.out.println(properties);
+        int scooterUnitPrice=Integer.parseInt(properties.getProperty("SCOOTER_UNIT_PRICE"));
+        int carUnitPrice=Integer.parseInt(properties.getProperty("CAR_UNIT_PRICE"));
+        int bikeUnitPrice=Integer.parseInt(properties.getProperty("BIKE_UNIT_PRICE"));
+        int distanceNarrow=Integer.parseInt(properties.getProperty("DISTANCE_NARROW"));
+        int distanceWide=Integer.parseInt(properties.getProperty("DISTANCE_WIDE"));
+        int discountProm=Integer.parseInt(properties.getProperty("DISCOUNT_PROM"));
+        int discount=Integer.parseInt(properties.getProperty("DISCOUNT"));
+
+        String vehicleType=Util.getVehicleType(vehicleID);
+
+        return 0;
     }
 
     public String getDateTime() {

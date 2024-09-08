@@ -1,5 +1,6 @@
 package org.unibl.etf.pj2.emobility.util;
 
+import org.unibl.etf.pj2.emobility.HelloApplication;
 import org.unibl.etf.pj2.emobility.model.rental.Coordinate;
 import org.unibl.etf.pj2.emobility.model.rental.Rental;
 import org.unibl.etf.pj2.emobility.model.vehicle.Bicycle;
@@ -7,13 +8,18 @@ import org.unibl.etf.pj2.emobility.model.vehicle.Car;
 import org.unibl.etf.pj2.emobility.model.vehicle.Scooter;
 import org.unibl.etf.pj2.emobility.model.vehicle.Vehicle;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class Util {
+
+    private static final String CONFIG_PATH = "src/main/resources/config.properties";
+
 
     public static List<Vehicle> loadVehicles(String fileName) {
         List<Vehicle> vehicles = new ArrayList<>();
@@ -41,7 +47,6 @@ public class Util {
         return vehicles;
     }
 
-
     public static List<Rental> loadRentals(String fileName) {
         List<Rental> rentals = new ArrayList<>();
         try {
@@ -65,12 +70,32 @@ public class Util {
                     boolean failure = "da".equals(parts[8]);
                     boolean discount = "da".equals(parts[9]);
 
-                    rentals.add(new Rental(date, userName, start, end, duration));
+                    rentals.add(new Rental(id, date, userName, start, end, duration));
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
         return rentals;
+    }
+
+    public static String getVehicleType(String vehicleID){
+        for(Vehicle vehicle: HelloApplication.vehicles){
+            if(vehicleID.equals(vehicle.getId())){
+
+            }
+        }
+    }
+
+    public static Properties loadProperties() {
+        Properties properties = new Properties();
+        FileInputStream fip;
+        try {
+            fip = new FileInputStream(CONFIG_PATH);
+            properties.load(fip);
+        } catch (IOException e) {
+            //System.Logger.getLogger(Util.class.getName()).log(System.Logger.Level.SEVERE, e.fillInStackTrace().toString());
+        }
+        return properties;
     }
 }
