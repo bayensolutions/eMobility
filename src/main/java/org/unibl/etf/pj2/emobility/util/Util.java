@@ -82,9 +82,10 @@ public class Util {
     public static String getVehicleType(String vehicleID){
         for(Vehicle vehicle: HelloApplication.vehicles){
             if(vehicleID.equals(vehicle.getId())){
-
+                return "happy";
             }
         }
+        return "";
     }
 
     public static Properties loadProperties() {
