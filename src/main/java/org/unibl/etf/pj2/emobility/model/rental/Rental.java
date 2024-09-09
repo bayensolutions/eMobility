@@ -14,38 +14,44 @@ public class Rental extends Thread {
     private Coordinate endCoordinate;
     private double price;
     private int duration;
-    private static int rentalNumber=0;
+    private boolean failure;
+    private boolean promoDiscount;
 
-    public Rental(String vehicleID, String dateTime, String userName, Coordinate startCoordinate, Coordinate endCoordinate, int duration) {
-        this.vehicleID=vehicleID;
+    private static int rentalNumber = 0;
+
+    public Rental(String vehicleID, String dateTime, String userName, Coordinate startCoordinate, Coordinate endCoordinate, int duration, boolean failure, boolean promoDiscount) {
+        this.vehicleID = vehicleID;
         this.dateTime = dateTime;
         this.userName = userName;
         this.startCoordinate = startCoordinate;
         this.endCoordinate = endCoordinate;
-        this.duration=duration;
+        this.duration = duration;
+        this.failure = failure;
+        this.promoDiscount = promoDiscount;
         rentalNumber++;
     }
 
-    public double calculateRental(){
-        Properties properties= Util.loadProperties();
+    public double calculateRental() {
+        Properties properties = Util.loadProperties();
         //System.out.println(properties);
-        int scooterUnitPrice=Integer.parseInt(properties.getProperty("SCOOTER_UNIT_PRICE"));
-        int carUnitPrice=Integer.parseInt(properties.getProperty("CAR_UNIT_PRICE"));
-        int bikeUnitPrice=Integer.parseInt(properties.getProperty("BIKE_UNIT_PRICE"));
-        int distanceNarrow=Integer.parseInt(properties.getProperty("DISTANCE_NARROW"));
-        int distanceWide=Integer.parseInt(properties.getProperty("DISTANCE_WIDE"));
-        int discountProm=Integer.parseInt(properties.getProperty("DISCOUNT_PROM"));
-        int discount=Integer.parseInt(properties.getProperty("DISCOUNT"));
+        int scooterUnitPrice = Integer.parseInt(properties.getProperty("SCOOTER_UNIT_PRICE"));
+        int carUnitPrice = Integer.parseInt(properties.getProperty("CAR_UNIT_PRICE"));
+        int bikeUnitPrice = Integer.parseInt(properties.getProperty("BIKE_UNIT_PRICE"));
+        int distanceNarrow = Integer.parseInt(properties.getProperty("DISTANCE_NARROW"));
+        int distanceWide = Integer.parseInt(properties.getProperty("DISTANCE_WIDE"));
+        int discountProm = Integer.parseInt(properties.getProperty("DISCOUNT_PROM"));
+        int discount = Integer.parseInt(properties.getProperty("DISCOUNT"));
 
-        String vehicleType=Util.getVehicleType(vehicleID);
-        int basicPrice;
-        switch (vehicleType){
-            case "automobil" -> basicPrice=carUnitPrice*duration;
-            case "bicikl"-> basicPrice=bikeUnitPrice*duration;
-            case "trotinet"->basicPrice=scooterUnitPrice*duration;
-            default -> basicPrice=0;
+        String vehicleType = Util.getVehicleType(vehicleID);
+        int basicPrice, distance;
+        switch (vehicleType) {
+            case "automobil" -> basicPrice = carUnitPrice * duration;
+            case "bicikl" -> basicPrice = bikeUnitPrice * duration;
+            case "trotinet" -> basicPrice = scooterUnitPrice * duration;
+            default -> basicPrice = 0;
         }
-
+        if (Util.isDistanceWide(startCoordinate, endCoordinate)) basicPrice *= distanceWide;
+        else basicPrice *= distanceNarrow;
         return (double) basicPrice;
     }
 
@@ -97,6 +103,38 @@ public class Rental extends Thread {
         this.duration = duration;
     }
 
+    public String getVehicleID() {
+        return vehicleID;
+    }
+
+    public void setVehicleID(String vehicleID) {
+        this.vehicleID = vehicleID;
+    }
+
+    public boolean isFailure() {
+        return failure;
+    }
+
+    public void setFailure(boolean failure) {
+        this.failure = failure;
+    }
+
+    public boolean isPromoDiscount() {
+        return promoDiscount;
+    }
+
+    public void setPromoDiscount(boolean promoDiscount) {
+        this.promoDiscount = promoDiscount;
+    }
+
+    public static int getRentalNumber() {
+        return rentalNumber;
+    }
+
+    public static void setRentalNumber(int rentalNumber) {
+        Rental.rentalNumber = rentalNumber;
+    }
+
     @Override
     public String toString() {
         return "Rental{" +
@@ -107,6 +145,8 @@ public class Rental extends Thread {
                 ", endCoordinate=" + endCoordinate +
                 ", price=" + price +
                 ", duration=" + duration +
+                ", failure=" + failure +
+                ", promoDiscount=" + promoDiscount +
                 "} " + super.toString();
     }
 }

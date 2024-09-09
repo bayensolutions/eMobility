@@ -24,7 +24,7 @@ public class HelloApplication extends Application {
     public static final String rentalsFileName = "PJ2 - projektni zadatak 2024 - Iznajmljivanja.csv";
 
 
-    public static List<AbstractMap.SimpleEntry<String, String>> vehiclesList=new ArrayList<>();
+    public static List<AbstractMap.SimpleEntry<String, String>> vehiclesList = new ArrayList<>();
 
 
     @Override
@@ -40,7 +40,7 @@ public class HelloApplication extends Application {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy HH:mm");
         //launch();
 
-        List<Vehicle> vehicles=Util.loadVehicles(vehiclesFileName);
+        List<Vehicle> vehicles = Util.loadVehicles(vehiclesFileName);
         System.out.println(vehiclesList);
 
         List<Rental> sortedRentals = Util.loadRentals(rentalsFileName).stream().sorted((r1, r2) -> {
@@ -49,7 +49,7 @@ public class HelloApplication extends Application {
             return dt1.compareTo(dt2);
         }).distinct().collect(Collectors.toList());
         System.out.println(sortedRentals);
-        for(Rental r:sortedRentals){
+        for (Rental r : sortedRentals) {
             System.out.println(r.calculateRental());
         }
 

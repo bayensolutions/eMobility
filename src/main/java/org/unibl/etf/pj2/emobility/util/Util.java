@@ -81,7 +81,7 @@ public class Util {
                     boolean failure = "da".equals(parts[8]);
                     boolean discount = "da".equals(parts[9]);
 
-                    rentals.add(new Rental(id, date, userName, start, end, duration));
+                    rentals.add(new Rental(id, date, userName, start, end, duration, failure, discount));
                 }
             }
         } catch (IOException e) {
@@ -97,6 +97,10 @@ public class Util {
             }
         }
         return null;
+    }
+
+    public static boolean isDistanceWide(Coordinate begin, Coordinate end) {
+        return begin.getX() < 5 || begin.getY() < 5 || begin.getX() > 14 || begin.getY() > 14 || end.getX() < 5 || end.getY() < 5 || end.getX() > 14 || end.getY() > 14;
     }
 
     public static Properties loadProperties() {
