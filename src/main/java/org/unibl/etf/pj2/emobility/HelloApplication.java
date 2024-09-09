@@ -12,6 +12,8 @@ import org.unibl.etf.pj2.emobility.util.Util;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -22,7 +24,7 @@ public class HelloApplication extends Application {
     public static final String rentalsFileName = "PJ2 - projektni zadatak 2024 - Iznajmljivanja.csv";
 
 
-    public static List<Vehicle> vehicles;
+    public static List<AbstractMap.SimpleEntry<String, String>> vehiclesList=new ArrayList<>();
 
 
     @Override
@@ -38,7 +40,8 @@ public class HelloApplication extends Application {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy HH:mm");
         //launch();
 
-        vehicles=Util.loadVehicles(vehiclesFileName);
+        List<Vehicle> vehicles=Util.loadVehicles(vehiclesFileName);
+        System.out.println(vehiclesList);
 
         List<Rental> sortedRentals = Util.loadRentals(rentalsFileName).stream().sorted((r1, r2) -> {
             LocalDateTime dt1 = LocalDateTime.parse(r1.getDateTime().replace("\"", "").trim(), formatter);
@@ -46,6 +49,9 @@ public class HelloApplication extends Application {
             return dt1.compareTo(dt2);
         }).distinct().collect(Collectors.toList());
         System.out.println(sortedRentals);
+        for(Rental r:sortedRentals){
+            System.out.println(r.calculateRental());
+        }
 
 
     }

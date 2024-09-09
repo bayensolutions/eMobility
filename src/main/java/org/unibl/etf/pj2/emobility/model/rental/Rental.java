@@ -13,10 +13,10 @@ public class Rental extends Thread {
     private Coordinate startCoordinate;
     private Coordinate endCoordinate;
     private double price;
-    private long duration;
+    private int duration;
     private static int rentalNumber=0;
 
-    public Rental(String vehicleID, String dateTime, String userName, Coordinate startCoordinate, Coordinate endCoordinate, long duration) {
+    public Rental(String vehicleID, String dateTime, String userName, Coordinate startCoordinate, Coordinate endCoordinate, int duration) {
         this.vehicleID=vehicleID;
         this.dateTime = dateTime;
         this.userName = userName;
@@ -38,8 +38,15 @@ public class Rental extends Thread {
         int discount=Integer.parseInt(properties.getProperty("DISCOUNT"));
 
         String vehicleType=Util.getVehicleType(vehicleID);
+        int basicPrice;
+        switch (vehicleType){
+            case "automobil" -> basicPrice=carUnitPrice*duration;
+            case "bicikl"-> basicPrice=bikeUnitPrice*duration;
+            case "trotinet"->basicPrice=scooterUnitPrice*duration;
+            default -> basicPrice=0;
+        }
 
-        return 0;
+        return (double) basicPrice;
     }
 
     public String getDateTime() {
@@ -86,19 +93,20 @@ public class Rental extends Thread {
         return duration;
     }
 
-    public void setDuration(long duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 
     @Override
     public String toString() {
         return "Rental{" +
-                "dateTime='" + dateTime + '\'' +
+                "vehicleID='" + vehicleID + '\'' +
+                ", dateTime='" + dateTime + '\'' +
                 ", userName='" + userName + '\'' +
                 ", startCoordinate=" + startCoordinate +
                 ", endCoordinate=" + endCoordinate +
                 ", price=" + price +
                 ", duration=" + duration +
-                '}';
+                "} " + super.toString();
     }
 }

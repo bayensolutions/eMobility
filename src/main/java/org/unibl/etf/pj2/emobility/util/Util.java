@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -35,9 +36,19 @@ public class Util {
                     double price = Double.parseDouble(parts[4]);
 
                     switch (parts[8]) {
-                        case "automobil" -> vehicles.add(new Car(id, producer, model, parts[3], price, 100, parts[7]));
-                        case "bicikl" -> vehicles.add(new Bicycle(id, producer, model, price, 100, Integer.parseInt(parts[5])));
-                        case "trotinet" -> vehicles.add(new Scooter(id, producer, model, price, 100, Integer.parseInt(parts[6])));
+                        case "automobil" -> {
+                            vehicles.add(new Car(id, producer, model, parts[3], price, 100, parts[7]));
+                            HelloApplication.vehiclesList.add(new AbstractMap.SimpleEntry<>(id, parts[8]));
+                        }
+                        case "bicikl" -> {
+                            vehicles.add(new Bicycle(id, producer, model, price, 100, Integer.parseInt(parts[5])));
+                            HelloApplication.vehiclesList.add(new AbstractMap.SimpleEntry<>(id, parts[8]));
+                        }
+                        case "trotinet" -> {
+                            vehicles.add(new Scooter(id, producer, model, price, 100, Integer.parseInt(parts[6])));
+                            HelloApplication.vehiclesList.add(new AbstractMap.SimpleEntry<>(id, parts[8]));
+                        }
+
                     }
                 }
             }
@@ -79,13 +90,13 @@ public class Util {
         return rentals;
     }
 
-    public static String getVehicleType(String vehicleID){
-        for(Vehicle vehicle: HelloApplication.vehicles){
-            if(vehicleID.equals(vehicle.getId())){
-                return "happy";
+    public static String getVehicleType(String vehicleID) {
+        for (AbstractMap.SimpleEntry<String, String> entry : HelloApplication.vehiclesList) {
+            if (entry.getKey().equals(vehicleID)) {
+                return entry.getValue();
             }
         }
-        return "";
+        return null;
     }
 
     public static Properties loadProperties() {
