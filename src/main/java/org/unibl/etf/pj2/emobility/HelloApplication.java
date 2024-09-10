@@ -48,6 +48,11 @@ public class HelloApplication extends Application {
             LocalDateTime dt2 = LocalDateTime.parse(r2.getDateTime().replace("\"", "").trim(), formatter);
             return dt1.compareTo(dt2);
         }).distinct().collect(Collectors.toList());
+
+        for (int i = 0; i < sortedRentals.size(); i++) {
+            sortedRentals.get(i).setRentalNumber(i + 1);
+        }
+
         System.out.println(sortedRentals);
         for (Rental r : sortedRentals) {
             System.out.println(r.calculateRental());

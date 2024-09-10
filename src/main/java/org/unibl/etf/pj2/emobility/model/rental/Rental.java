@@ -17,7 +17,7 @@ public class Rental extends Thread {
     private boolean failure;
     private boolean promoDiscount;
 
-    private static int rentalNumber = 0;
+    private int rentalNumber = 0;
 
     public Rental(String vehicleID, String dateTime, String userName, Coordinate startCoordinate, Coordinate endCoordinate, int duration, boolean failure, boolean promoDiscount) {
         this.vehicleID = vehicleID;
@@ -42,17 +42,26 @@ public class Rental extends Thread {
         int discountProm = Integer.parseInt(properties.getProperty("DISCOUNT_PROM"));
         int discount = Integer.parseInt(properties.getProperty("DISCOUNT"));
 
-        String vehicleType = Util.getVehicleType(vehicleID);
-        int basicPrice, distance;
-        switch (vehicleType) {
-            case "automobil" -> basicPrice = carUnitPrice * duration;
-            case "bicikl" -> basicPrice = bikeUnitPrice * duration;
-            case "trotinet" -> basicPrice = scooterUnitPrice * duration;
-            default -> basicPrice = 0;
+        if (!failure) {
+            String vehicleType = Util.getVehicleType(vehicleID);
+            double basicPrice;
+            switch (vehicleType) {
+                case "automobil" -> basicPrice = carUnitPrice * duration;
+                case "bicikl" -> basicPrice = bikeUnitPrice * duration;
+                case "trotinet" -> basicPrice = scooterUnitPrice * duration;
+                default -> basicPrice = 0;
+            }
+            if (Util.isDistanceWide(startCoordinate, endCoordinate)) basicPrice *= distanceWide;
+            else basicPrice *= distanceNarrow;
+            if(rentalNumber%10==0){
+                basicPrice-=basicPrice*discount/100.00;
+            }
+            if(promoDiscount){
+                basicPrice-=basicPrice*discountProm/100.00;
+            }
+            return basicPrice;
         }
-        if (Util.isDistanceWide(startCoordinate, endCoordinate)) basicPrice *= distanceWide;
-        else basicPrice *= distanceNarrow;
-        return (double) basicPrice;
+        return 0;
     }
 
     public String getDateTime() {
@@ -127,12 +136,12 @@ public class Rental extends Thread {
         this.promoDiscount = promoDiscount;
     }
 
-    public static int getRentalNumber() {
+    public int getRentalNumber() {
         return rentalNumber;
     }
 
-    public static void setRentalNumber(int rentalNumber) {
-        Rental.rentalNumber = rentalNumber;
+    public void setRentalNumber(int rentalNumber) {
+        this.rentalNumber = rentalNumber;
     }
 
     @Override
@@ -147,6 +156,7 @@ public class Rental extends Thread {
                 ", duration=" + duration +
                 ", failure=" + failure +
                 ", promoDiscount=" + promoDiscount +
-                "} " + super.toString();
+                ", rentalNumber= "+rentalNumber+
+                "} "+"\n";
     }
 }
