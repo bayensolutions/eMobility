@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 import org.unibl.etf.pj2.emobility.model.rental.Rental;
 import org.unibl.etf.pj2.emobility.model.vehicle.Vehicle;
 import org.unibl.etf.pj2.emobility.util.Util;
@@ -15,7 +14,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class HelloApplication extends Application {
@@ -53,10 +51,11 @@ public class HelloApplication extends Application {
             sortedRentals.get(i).setRentalNumber(i + 1);
         }
 
-        System.out.println(sortedRentals);
-        for (Rental r : sortedRentals) {
-            System.out.println(r.calculateRental());
+        for(Rental r:sortedRentals){
+            System.out.println(r);
+            System.out.println(Util.getPath(r.getStartCoordinate(),r.getEndCoordinate()));
         }
+
 
 
     }

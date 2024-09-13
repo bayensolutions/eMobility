@@ -29,9 +29,10 @@ public class Rental extends Thread {
         this.failure = failure;
         this.promoDiscount = promoDiscount;
         rentalNumber++;
+        this.price=calculateRentalPrice();
     }
 
-    public double calculateRental() {
+    public double calculateRentalPrice() {
         Properties properties = Util.loadProperties();
         //System.out.println(properties);
         int scooterUnitPrice = Integer.parseInt(properties.getProperty("SCOOTER_UNIT_PRICE"));

@@ -79,7 +79,7 @@ public class Util {
 
                     int duration = Integer.parseInt(parts[7]);
                     boolean failure = "da".equals(parts[8]);
-                    boolean discount = "da".equals(parts[9]);
+                    boolean discount = "da\"".equals(parts[9]);
 
                     rentals.add(new Rental(id, date, userName, start, end, duration, failure, discount));
                 }
@@ -101,6 +101,28 @@ public class Util {
 
     public static boolean isDistanceWide(Coordinate begin, Coordinate end) {
         return begin.getX() < 5 || begin.getY() < 5 || begin.getX() > 14 || begin.getY() > 14 || end.getX() < 5 || end.getY() < 5 || end.getX() > 14 || end.getY() > 14;
+    }
+
+    public static List<Coordinate> getPath(Coordinate begin, Coordinate end){
+        List<Coordinate> path=new ArrayList<>();
+        int currentX= begin.getX(), currentY= begin.getY();
+        path.add(new Coordinate(currentX,currentY));
+        while(currentX!=end.getX()) {
+            if (begin.getX() < end.getX()) {
+                path.add(new Coordinate(++currentX, currentY));
+            } else {
+                path.add(new Coordinate(--currentX, currentY));
+            }
+        }
+        while(currentY!=end.getY()){
+            if(begin.getY()<end.getY()){
+                path.add(new Coordinate(currentX,++currentY));
+            }
+            else{
+                path.add(new Coordinate(currentX,--currentY));
+            }
+        }
+        return path;
     }
 
     public static Properties loadProperties() {
