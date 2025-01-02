@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import org.unibl.etf.pj2.emobility.model.ui.TableRowData;
+import org.unibl.etf.pj2.emobility.model.ui.ResultsTableRowData;
 
 import java.time.LocalDate;
 import java.util.stream.IntStream;
@@ -36,27 +36,27 @@ public class ReportsController {
     private Label totalTax;
 
     @FXML
-    public TableView<TableRowData> dailyReportTable;
+    public TableView<ResultsTableRowData> dailyReportTable;
     @FXML
-    private TableColumn<TableRowData, String> dateColumn;
+    private TableColumn<ResultsTableRowData, String> dateColumn;
 
     @FXML
-    private TableColumn<TableRowData, Double> totalIncomeColumn;
+    private TableColumn<ResultsTableRowData, Double> totalIncomeColumn;
 
     @FXML
-    private TableColumn<TableRowData, Double> totalDiscountColumn;
+    private TableColumn<ResultsTableRowData, Double> totalDiscountColumn;
 
     @FXML
-    private TableColumn<TableRowData, Double> totalPromotionsColumn;
+    private TableColumn<ResultsTableRowData, Double> totalPromotionsColumn;
 
     @FXML
-    private TableColumn<TableRowData, Double> totalDrivesColumn;
+    private TableColumn<ResultsTableRowData, Double> totalDrivesColumn;
 
     @FXML
-    private TableColumn<TableRowData, Double> totalMaintainColumn;
+    private TableColumn<ResultsTableRowData, Double> totalMaintainColumn;
 
     @FXML
-    private TableColumn<TableRowData, Double> totalRepairColumn;
+    private TableColumn<ResultsTableRowData, Double> totalRepairColumn;
 
     @FXML
     public void initialize() {
@@ -70,7 +70,7 @@ public class ReportsController {
         totalRepairColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getTotalRepair()).asObject());
 
         // Generate 100 TableRowData objects using Streams
-        ObservableList<TableRowData> data = FXCollections.observableArrayList(
+        ObservableList<ResultsTableRowData> data = FXCollections.observableArrayList(
                 IntStream.range(0, 100).mapToObj(i -> {
                     LocalDate date = LocalDate.of(2025, 1, 1).plusDays(i);
                     double income = 450 + Math.random() * 150; // Random income between 450 and 600
@@ -80,7 +80,7 @@ public class ReportsController {
                     double netProfit = income - expense;      // Example calculation
                     double profitMargin = netProfit * 0.1;    // Example calculation
 
-                    return new TableRowData(date.toString(), income, expense, tax, totalIncome, netProfit, profitMargin);
+                    return new ResultsTableRowData(date.toString(), income, expense, tax, totalIncome, netProfit, profitMargin);
                 }).toList()
         );
 

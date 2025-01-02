@@ -3,7 +3,7 @@ package org.unibl.etf.pj2.emobility.model.ui;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class TableRowData {
+public class ResultsTableRowData {
     private final SimpleStringProperty date;
     private final SimpleDoubleProperty totalIncome;
     private final SimpleDoubleProperty totalDiscount;
@@ -12,9 +12,9 @@ public class TableRowData {
     private final SimpleDoubleProperty totalMaintain;
     private final SimpleDoubleProperty totalRepair;
 
-    public TableRowData(String date, double totalIncome, double totalDiscount,
-                        double totalPromotions, double totalDrives,
-                        double totalMaintain, double totalRepair) {
+    public ResultsTableRowData(String date, double totalIncome, double totalDiscount,
+                               double totalPromotions, double totalDrives,
+                               double totalMaintain, double totalRepair) {
         this.date = new SimpleStringProperty(date);
         this.totalIncome = new SimpleDoubleProperty(totalIncome);
         this.totalDiscount = new SimpleDoubleProperty(totalDiscount);
