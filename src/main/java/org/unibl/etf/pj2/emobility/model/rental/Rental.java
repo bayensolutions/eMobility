@@ -4,6 +4,7 @@ import org.unibl.etf.pj2.emobility.model.user.User;
 import org.unibl.etf.pj2.emobility.util.Util;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Properties;
 
 public class Rental extends Thread {
@@ -29,7 +30,15 @@ public class Rental extends Thread {
         this.failure = failure;
         this.promoDiscount = promoDiscount;
         rentalNumber++;
-        this.price=calculateRentalPrice();
+        this.price = calculateRentalPrice();
+    }
+
+    @Override
+    public void run(){
+        List<Coordinate> path=Util.getPath(startCoordinate,endCoordinate);
+        for(Coordinate currentPosition:path){
+            System.out.println(this.vehicleID+" trenutno se nalazi na poziciji "+currentPosition);
+        }
     }
 
     public double calculateRentalPrice() {
@@ -54,11 +63,11 @@ public class Rental extends Thread {
             }
             if (Util.isDistanceWide(startCoordinate, endCoordinate)) basicPrice *= distanceWide;
             else basicPrice *= distanceNarrow;
-            if(rentalNumber%10==0){
-                basicPrice-=basicPrice*discount/100.00;
+            if (rentalNumber % 10 == 0) {
+                basicPrice -= basicPrice * discount / 100.00;
             }
-            if(promoDiscount){
-                basicPrice-=basicPrice*discountProm/100.00;
+            if (promoDiscount) {
+                basicPrice -= basicPrice * discountProm / 100.00;
             }
             return basicPrice;
         }
@@ -157,7 +166,7 @@ public class Rental extends Thread {
                 ", duration=" + duration +
                 ", failure=" + failure +
                 ", promoDiscount=" + promoDiscount +
-                ", rentalNumber= "+rentalNumber+
-                "} "+"\n";
+                ", rentalNumber= " + rentalNumber +
+                "} " + "\n";
     }
 }

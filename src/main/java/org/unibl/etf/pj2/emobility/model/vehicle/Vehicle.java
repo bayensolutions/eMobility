@@ -2,7 +2,7 @@ package org.unibl.etf.pj2.emobility.model.vehicle;
 
 import java.time.LocalDateTime;
 
-public abstract class Vehicle extends Thread implements IDrivable {
+public abstract class Vehicle implements IDrivable {
     protected String id;
     protected String producer;
     protected String model;

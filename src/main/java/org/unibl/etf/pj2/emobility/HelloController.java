@@ -23,20 +23,25 @@ public class HelloController {
             for (int col = 0; col < SIZE; col++) {
                 TextField cell = new TextField();
                 cell.setPrefSize(50, 50); // Veličina svakog polja
+                cell.setEditable(false); // Onemogućavamo editovanje
+                cell.getStyleClass().add("text-field");
 
-                // Oboji određena polja u plavo
                 if (shouldBeColored(row, col)) {
-                    cell.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+                    cell.getStyleClass().add("highlight"); // Dodajemo klasu za bojenje
                 }
 
-                gridPane.add(cell, col, row); // Dodajemo TextField u GridPane
+                if (row == 5 && col == 5) {
+                    cell.setText("T");
+                }
+
+                // Dodajemo TextField u GridPane
+                gridPane.add(cell, col, row);
             }
         }
     }
 
-    // Metoda koja određuje koja polja treba obojiti
+
     private boolean shouldBeColored(int row, int col) {
-        // Primer: Oboj ćelije u prvoj i poslednjoj koloni, i prvoj i poslednjoj vrsti
-        return (row > 4 && row <15 && col>4 && col<15);
+        return (row > 4 && row < 15 && col > 4 && col < 15);
     }
 }

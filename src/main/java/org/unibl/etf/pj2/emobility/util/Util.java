@@ -103,23 +103,22 @@ public class Util {
         return begin.getX() < 5 || begin.getY() < 5 || begin.getX() > 14 || begin.getY() > 14 || end.getX() < 5 || end.getY() < 5 || end.getX() > 14 || end.getY() > 14;
     }
 
-    public static List<Coordinate> getPath(Coordinate begin, Coordinate end){
-        List<Coordinate> path=new ArrayList<>();
-        int currentX= begin.getX(), currentY= begin.getY();
-        path.add(new Coordinate(currentX,currentY));
-        while(currentX!=end.getX()) {
+    public static List<Coordinate> getPath(Coordinate begin, Coordinate end) {
+        List<Coordinate> path = new ArrayList<>();
+        int currentX = begin.getX(), currentY = begin.getY();
+        path.add(new Coordinate(currentX, currentY));
+        while (currentX != end.getX()) {
             if (begin.getX() < end.getX()) {
                 path.add(new Coordinate(++currentX, currentY));
             } else {
                 path.add(new Coordinate(--currentX, currentY));
             }
         }
-        while(currentY!=end.getY()){
-            if(begin.getY()<end.getY()){
-                path.add(new Coordinate(currentX,++currentY));
-            }
-            else{
-                path.add(new Coordinate(currentX,--currentY));
+        while (currentY != end.getY()) {
+            if (begin.getY() < end.getY()) {
+                path.add(new Coordinate(currentX, ++currentY));
+            } else {
+                path.add(new Coordinate(currentX, --currentY));
             }
         }
         return path;

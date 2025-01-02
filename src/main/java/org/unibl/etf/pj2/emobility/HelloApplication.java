@@ -31,12 +31,13 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 1000, 600);
         stage.setResizable(false);
         stage.setScene(scene);
+        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         stage.show();
     }
 
     public static void main(String[] args) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy HH:mm");
-        //launch();
+        launch();
 
         List<Vehicle> vehicles = Util.loadVehicles(vehiclesFileName);
         System.out.println(vehiclesList);
@@ -52,11 +53,10 @@ public class HelloApplication extends Application {
         }
 
         for(Rental r:sortedRentals){
+            r.start();
             System.out.println(r);
-            System.out.println(Util.getPath(r.getStartCoordinate(),r.getEndCoordinate()));
+            //System.out.println(Util.getPath(r.getStartCoordinate(),r.getEndCoordinate()));
         }
-
-
 
     }
 }
