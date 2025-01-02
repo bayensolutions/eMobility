@@ -11,5 +11,6 @@ module org.unibl.etf.pj2.emobility {
     requires eu.hansolo.tilesfx;
 
     opens org.unibl.etf.pj2.emobility to javafx.fxml;
+    opens org.unibl.etf.pj2.emobility.controllers to javafx.fxml;
     exports org.unibl.etf.pj2.emobility;
 }
