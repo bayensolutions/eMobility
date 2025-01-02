@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.unibl.etf.pj2.emobility.controllers.VehiclesController">
+  <tabs>
+    <Tab text="Automobili">
+         <content>
+            <VBox>
+               <children>
+                  <TableView fx:id="carsTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                      <TableColumn fx:id="carsNoColumn" prefWidth="75.0" text="Redni broj" />
+                      <TableColumn fx:id="carsIdColumn" prefWidth="75.0" text="Id" />
+                        <TableColumn fx:id="carsProducerColumn" prefWidth="75.0" text="Proizvođač" />
+                        <TableColumn fx:id="carsModelColumn" prefWidth="75.0" text="Model" />
+                        <TableColumn fx:id="carsDateTimeColumn" prefWidth="75.0" text="Datum nabavke" />
+                        <TableColumn fx:id="carsPurchasePriceColumn" prefWidth="75.0" text="Cijena nabavke" />
+                        <TableColumn fx:id="carsBatteryLevelColumn" prefWidth="75.0" text="Nivo baterije" />
+                        <TableColumn fx:id="carsDescriptionColumn" prefWidth="75.0" text="Opis" />
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </content>
+    </Tab>
+    <Tab text="Bicikli">
+         <content>
+            <VBox>
+               <children>
+                  <TableView fx:id="bicyclesTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                      <TableColumn fx:id="bicyclesNoColumn" prefWidth="75.0" text="Redni broj" />
+                      <TableColumn fx:id="bicyclesIdColumn" prefWidth="75.0" text="Id" />
+                        <TableColumn fx:id="bicyclesProducerColumn" prefWidth="75.0" text="Proizvođač" />
+                        <TableColumn fx:id="bicyclesModelColumn" prefWidth="75.0" text="Model" />
+                        <TableColumn fx:id="bicyclesPurchasePriceColumn" prefWidth="75.0" text="Cijena nabavke" />
+                        <TableColumn fx:id="bicyclesBatteryLevelColumn" prefWidth="75.0" text="Nivo baterije" />
+                        <TableColumn fx:id="bicyclesRangeColumn" prefWidth="75.0" text="Domet" />
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </content>
+    </Tab>
+      <Tab text="Trotineti">
+         <content>
+            <VBox>
+               <children>
+                  <TableView fx:id="scootersTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                      <TableColumn fx:id="scootersNoColumn" prefWidth="75.0" text="Redni broj" />
+                      <TableColumn fx:id="scootersIdColumn" prefWidth="75.0" text="Id" />
+                        <TableColumn fx:id="scootersProducerColumn" prefWidth="75.0" text="Proizvođač" />
+                        <TableColumn fx:id="scootersModelColumn" prefWidth="75.0" text="Model" />
+                        <TableColumn fx:id="scootersPurchasePriceColumn" prefWidth="75.0" text="Cijena nabavke" />
+                        <TableColumn fx:id="scootersBatteryLevelColumn" prefWidth="75.0" text="Nivo baterije" />
+                        <TableColumn fx:id="scootersMaximumSpeedColumn" prefWidth="75.0" text="Maksimalna brzina" />
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </content>
+      </Tab>
+  </tabs>
+</TabPane>

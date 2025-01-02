@@ -76,7 +76,19 @@ public class HelloController {
     }
 
     public void openRepairsWindow(ActionEvent actionEvent) {
-        // TODO
+        try {
+            // Load the FXML for the reports window using the correct resource path
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/failures.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage for the reports window
+            Stage stage = new Stage();
+            stage.setTitle("Kvarovi");
+            stage.setScene(new Scene(root, 840, 400)); // Adjust the size as needed
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

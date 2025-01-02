@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.unibl.etf.pj2.emobility.controllers.FailuresController">
+   <children>
+      <TableView fx:id="failuresTable" VBox.vgrow="ALWAYS">
+        <columns>
+          <TableColumn fx:id="failuresNoColumn" prefWidth="75.0" text="Redni broj" />
+          <TableColumn fx:id="failuresVehicleTypeColumn" prefWidth="75.0" text="Tip vozila" />
+            <TableColumn fx:id="failuresIdColumn" prefWidth="75.0" text="Id" />
+            <TableColumn fx:id="failuresDateTimeColumn" prefWidth="75.0" text="Vrijeme" />
+            <TableColumn fx:id="failuresDescriptionColumn" prefWidth="75.0" text="Opis kvara" />
+        </columns>
+      </TableView>
+   </children>
+</VBox>
