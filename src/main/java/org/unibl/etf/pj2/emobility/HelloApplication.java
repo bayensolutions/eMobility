@@ -5,6 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.unibl.etf.pj2.emobility.model.rental.Rental;
+import org.unibl.etf.pj2.emobility.model.vehicle.Bicycle;
+import org.unibl.etf.pj2.emobility.model.vehicle.Car;
+import org.unibl.etf.pj2.emobility.model.vehicle.Scooter;
 import org.unibl.etf.pj2.emobility.model.vehicle.Vehicle;
 import org.unibl.etf.pj2.emobility.util.Util;
 
@@ -23,6 +26,9 @@ public class HelloApplication extends Application {
 
 
     public static List<AbstractMap.SimpleEntry<String, String>> vehiclesList = new ArrayList<>();
+    public static List<Car> cars=new ArrayList<>();
+    public static List<Bicycle> bicycles=new ArrayList<>();
+    public static List<Scooter> scooters=new ArrayList<>();
 
 
     @Override
@@ -39,7 +45,7 @@ public class HelloApplication extends Application {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy HH:mm");
         launch();
 
-        List<Vehicle> vehicles = Util.loadVehicles(vehiclesFileName);
+
         System.out.println(vehiclesList);
 
         List<Rental> sortedRentals = Util.loadRentals(rentalsFileName).stream().sorted((r1, r2) -> {
@@ -51,12 +57,12 @@ public class HelloApplication extends Application {
         for (int i = 0; i < sortedRentals.size(); i++) {
             sortedRentals.get(i).setRentalNumber(i + 1);
         }
-
+/*
         for(Rental r:sortedRentals){
             r.start();
             System.out.println(r);
             //System.out.println(Util.getPath(r.getStartCoordinate(),r.getEndCoordinate()));
         }
-
+*/
     }
 }

@@ -37,16 +37,22 @@ public class Util {
 
                     switch (parts[8]) {
                         case "automobil" -> {
-                            vehicles.add(new Car(id, producer, model, parts[3], price, 100, parts[7]));
+                            Car car=new Car(id, producer, model, parts[3], price, 100, parts[7]);
+                            vehicles.add(car);
                             HelloApplication.vehiclesList.add(new AbstractMap.SimpleEntry<>(id, parts[8]));
+                            HelloApplication.cars.add(car);
                         }
                         case "bicikl" -> {
-                            vehicles.add(new Bicycle(id, producer, model, price, 100, Integer.parseInt(parts[5])));
+                            Bicycle bicycle=new Bicycle(id,producer,model,price,100,Integer.parseInt(parts[5]));
+                            vehicles.add(bicycle);
                             HelloApplication.vehiclesList.add(new AbstractMap.SimpleEntry<>(id, parts[8]));
+                            HelloApplication.bicycles.add(bicycle);
                         }
                         case "trotinet" -> {
-                            vehicles.add(new Scooter(id, producer, model, price, 100, Integer.parseInt(parts[6])));
+                            Scooter scooter=new Scooter(id, producer, model, price, 100, Integer.parseInt(parts[6]));
+                            vehicles.add(scooter);
                             HelloApplication.vehiclesList.add(new AbstractMap.SimpleEntry<>(id, parts[8]));
+                            HelloApplication.scooters.add(scooter);
                         }
 
                     }

@@ -8,12 +8,16 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import org.unibl.etf.pj2.emobility.HelloApplication;
 import org.unibl.etf.pj2.emobility.model.ui.BicyclesTableRowData;
 import org.unibl.etf.pj2.emobility.model.ui.ResultsTableRowData;
 import org.unibl.etf.pj2.emobility.model.ui.CarsTableRowData;
 import org.unibl.etf.pj2.emobility.model.ui.ScootersTableRowData;
 import org.unibl.etf.pj2.emobility.model.vehicle.Car;
+import org.unibl.etf.pj2.emobility.model.vehicle.Vehicle;
+import org.unibl.etf.pj2.emobility.util.Util;
 
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class VehiclesController {
@@ -96,7 +100,8 @@ public class VehiclesController {
 
     @FXML
     public void initialize() {
-        // TODO Zamijeniti sa podacima koji se ucitavaju iz fajla, Util !!!
+        List<Vehicle> vehicles = Util.loadVehicles(HelloApplication.vehiclesFileName);
+
         carsNoColumn.setCellValueFactory(cellData -> {
             int index = carsTable.getItems().indexOf(cellData.getValue()) + 1;
             return new SimpleIntegerProperty(index).asObject();
@@ -109,23 +114,20 @@ public class VehiclesController {
         carsBatteryLevelColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getCurrentBatteryLevel()).asObject());
         carsDescriptionColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
 
-
-        // Create some random car data
         ObservableList<CarsTableRowData> carList = FXCollections.observableArrayList(
-                IntStream.range(0, 100).mapToObj(i -> new CarsTableRowData(
-                        "ID" + String.format("%03d", i + 1), // Generate IDs like ID001, ID002, ...
-                        "Producer" + (i + 1), // Example producer name
-                        "Model" + (i + 1), // Example model name
-                        20000.0 + (i * 1000), // Static date, change it as necessary
-                        80 + (i % 20), // Example price, increases with each iteration
-                        "2023-01-01", // Example battery level, varies
-                        "Description for car " + (i + 1) // Example description
-                )).toList()
+                HelloApplication.cars.stream().distinct()
+                        .map(car -> new CarsTableRowData(
+                                car.getId(),
+                                car.getProducer(),
+                                car.getModel(),
+                                car.getPurchasePrice(),
+                                car.getCurrentBatteryLevel(),
+                                car.getDateOfAcquisition(),
+                                car.getDescription()
+                        ))
+                        .toList()
         );
-
-        // Set the table items
         carsTable.setItems(carList);
-
 
         // Bicycles table initialization
         bicyclesNoColumn.setCellValueFactory(cellData -> {
@@ -139,17 +141,19 @@ public class VehiclesController {
         bicyclesBatteryLevelColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getCurrentBatteryLevel()).asObject());
         bicyclesRangeColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getRange()).asObject());
 
-        // Create random bicycle data
         ObservableList<BicyclesTableRowData> bicycleList = FXCollections.observableArrayList(
-                IntStream.range(0, 100).mapToObj(i -> new BicyclesTableRowData(
-                        "ID" + String.format("%03d", i + 1),
-                        "Producer" + (i + 1),
-                        "Model" + (i + 1),
-                        1000.0 + (i * 200),
-                        60 + (i % 40),
-                        25 + (i % 10) // Random range between 25 and 34
-                )).toList()
+                HelloApplication.bicycles.stream().distinct()
+                        .map(bicycle -> new BicyclesTableRowData(
+                                bicycle.getId(),
+                                bicycle.getProducer(),
+                                bicycle.getModel(),
+                                bicycle.getPurchasePrice(),
+                                bicycle.getCurrentBatteryLevel(),
+                                bicycle.getRange()
+                        ))
+                        .toList()
         );
+
         bicyclesTable.setItems(bicycleList);
 
         // Scooters table initialization
@@ -164,19 +168,20 @@ public class VehiclesController {
         scootersBatteryLevelColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getCurrentBatteryLevel()).asObject());
         scootersMaximumSpeedColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getMaximumSpeed()).asObject());
 
-        // Create random scooter data
-        ObservableList<ScootersTableRowData> scooterList = FXCollections.observableArrayList(
-                IntStream.range(0, 100).mapToObj(i -> new ScootersTableRowData(
-                        i + 1, // No for scooter
-                        "ID" + String.format("%03d", i + 1),
-                        "Producer" + (i + 1),
-                        "Model" + (i + 1),
-                        1500.0 + (i * 300),
-                        50 + (i % 30),
-                        40 + (i % 20) // Random maximum speed between 40 and 59
-                )).toList()
+        ObservableList<ScootersTableRowData> scootersList = FXCollections.observableArrayList(
+                HelloApplication.scooters.stream().distinct()
+                        .map(scooter -> new ScootersTableRowData(
+                                scooter.getId(),
+                                scooter.getProducer(),
+                                scooter.getModel(),
+                                scooter.getPurchasePrice(),
+                                scooter.getCurrentBatteryLevel(),
+                                scooter.getMaximumSpeed()
+                        ))
+                        .toList()
         );
-        scootersTable.setItems(scooterList);
+
+        scootersTable.setItems(scootersList);
     }
 
 }

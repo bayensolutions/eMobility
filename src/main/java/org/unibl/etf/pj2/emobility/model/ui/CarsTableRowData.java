@@ -1,6 +1,7 @@
 package org.unibl.etf.pj2.emobility.model.ui;
 
 import javafx.beans.property.SimpleStringProperty;
+import org.unibl.etf.pj2.emobility.model.vehicle.Car;
 
 public class CarsTableRowData extends VehiclesTableRowData {
     private final SimpleStringProperty dateTime;
@@ -19,4 +20,5 @@ public class CarsTableRowData extends VehiclesTableRowData {
     public String getDescription() {
         return description.get();
     }
+
 }

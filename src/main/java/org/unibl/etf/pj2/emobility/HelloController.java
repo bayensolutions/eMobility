@@ -100,7 +100,7 @@ public class HelloController {
 
             // Create a new stage for the reports window
             Stage stage = new Stage();
-            stage.setTitle("Reports");
+            stage.setTitle("Izvještaji");
             stage.setScene(new Scene(root, 840, 400)); // Adjust the size as needed
             stage.show();
         } catch (IOException e) {

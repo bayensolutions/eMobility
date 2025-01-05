@@ -1,6 +1,7 @@
 package org.unibl.etf.pj2.emobility.model.vehicle;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public abstract class Vehicle implements IDrivable {
     protected String id;
@@ -15,6 +16,19 @@ public abstract class Vehicle implements IDrivable {
         this.model = model;
         this.purchasePrice = purchasePrice;
         this.currentBatteryLevel = currentBatteryLevel;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vehicle vehicle = (Vehicle) o;
+        return id.equals(vehicle.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override
@@ -43,5 +57,23 @@ public abstract class Vehicle implements IDrivable {
         System.out.println(description + LocalDateTime.now());
     }
 
+    public String getId() {
+        return id;
+    }
 
+    public String getProducer() {
+        return producer;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public double getPurchasePrice() {
+        return purchasePrice;
+    }
+
+    public int getCurrentBatteryLevel() {
+        return currentBatteryLevel;
+    }
 }
