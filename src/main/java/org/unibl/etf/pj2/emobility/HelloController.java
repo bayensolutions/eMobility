@@ -85,7 +85,7 @@ public class HelloController {
 
                 if (previousDateTime != null && !rentalDateTime.isEqual(previousDateTime)) {
                     try {
-                        Thread.sleep(10000); // Pauza od 10 sekundi
+                        Thread.sleep(5000); // Pauza od 10 sekundi
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

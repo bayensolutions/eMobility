@@ -3,6 +3,10 @@ package org.unibl.etf.pj2.emobility.model.rental;
 import org.unibl.etf.pj2.emobility.model.user.User;
 import org.unibl.etf.pj2.emobility.util.Util;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Properties;
@@ -34,10 +38,52 @@ public class Rental extends Thread {
     }
 
     @Override
-    public void run(){
-        List<Coordinate> path=Util.getPath(startCoordinate,endCoordinate);
-        for(Coordinate currentPosition:path){
-            System.out.println(this.vehicleID+" trenutno se nalazi na poziciji "+currentPosition);
+    public void run() {
+        List<Coordinate> path = Util.getPath(startCoordinate, endCoordinate);
+        for (Coordinate currentPosition : path) {
+            System.out.println(this.vehicleID + " trenutno se nalazi na poziciji " + currentPosition);
+        }
+
+        try {
+            Thread.sleep(1000); // Simulacija kretanja vozila (1 sekunda između pozicija)
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        // Kada se rentanje završi, kreiraj račun
+        generateBill();
+    }
+
+    private void generateBill() {
+        // Relativna putanja do foldera za račune
+        Properties properties = Util.loadProperties();
+        String billsPath = Paths.get(properties.getProperty("BILL_FILE_PATH")).toString();
+
+        // Kreiranje direktorijuma ako ne postoji
+        File directory = new File(billsPath);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        // Generisanje imena fajla
+        String fileName = "bill_" + vehicleID + "_" + userName + ".txt";
+        File billFile = new File(directory, fileName);
+
+        // Pisanje u fajl
+        try (FileWriter writer = new FileWriter(billFile)) {
+            writer.write("********** Račun za Rentanje **********\n");
+            writer.write("ID vozila: " + vehicleID + "\n");
+            writer.write("Ime korisnika: " + userName + "\n");
+            writer.write("Datum i vreme rentanja: " + dateTime + "\n");
+            writer.write("Početne koordinate: " + startCoordinate + "\n");
+            writer.write("Krajnje koordinate: " + endCoordinate + "\n");
+            writer.write("Trajanje (u sekundama): " + duration + "\n");
+            writer.write("Promotivni popust: " + (promoDiscount ? "Da" : "Ne") + "\n");
+            writer.write("Cijena: " + String.format("%.2f", price) + " KM\n");
+            writer.write("***************************************\n");
+
+            System.out.println("Račun uspješno kreiran: " + billFile.getAbsolutePath());
+        } catch (IOException e) {
+            System.err.println("Greška pri kreiranju računa: " + e.getMessage());
         }
     }
 
