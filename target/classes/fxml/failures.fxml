@@ -4,7 +4,6 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.unibl.etf.pj2.emobility.controllers.FailuresController">
    <children>
       <TableView fx:id="failuresTable" VBox.vgrow="ALWAYS">

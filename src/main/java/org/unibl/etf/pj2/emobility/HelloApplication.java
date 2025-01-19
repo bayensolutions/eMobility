@@ -24,12 +24,10 @@ public class HelloApplication extends Application {
     public static final String vehiclesFileName = "PJ2 - projektni zadatak 2024 - Prevozna sredstva.csv";
     public static final String rentalsFileName = "PJ2 - projektni zadatak 2024 - Iznajmljivanja.csv";
 
-
     public static List<AbstractMap.SimpleEntry<String, String>> vehiclesList = new ArrayList<>();
     public static List<Car> cars=new ArrayList<>();
     public static List<Bicycle> bicycles=new ArrayList<>();
     public static List<Scooter> scooters=new ArrayList<>();
-
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -43,10 +41,9 @@ public class HelloApplication extends Application {
 
     public static void main(String[] args) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy HH:mm");
+        Util.loadVehicles(vehiclesFileName);
+        Util.loadRentals(rentalsFileName);
         launch();
-
-
-        System.out.println(vehiclesList);
 
         List<Rental> sortedRentals = Util.loadRentals(rentalsFileName).stream().sorted((r1, r2) -> {
             LocalDateTime dt1 = LocalDateTime.parse(r1.getDateTime().replace("\"", "").trim(), formatter);
@@ -57,12 +54,12 @@ public class HelloApplication extends Application {
         for (int i = 0; i < sortedRentals.size(); i++) {
             sortedRentals.get(i).setRentalNumber(i + 1);
         }
-/*
+
         for(Rental r:sortedRentals){
             r.start();
             System.out.println(r);
             //System.out.println(Util.getPath(r.getStartCoordinate(),r.getEndCoordinate()));
         }
-*/
+
     }
 }

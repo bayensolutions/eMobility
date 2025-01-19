@@ -98,6 +98,7 @@ public class Util {
 
     public static String getVehicleType(String vehicleID) {
         for (AbstractMap.SimpleEntry<String, String> entry : HelloApplication.vehiclesList) {
+
             if (entry.getKey().equals(vehicleID)) {
                 return entry.getValue();
             }
