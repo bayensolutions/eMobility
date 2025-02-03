@@ -54,21 +54,17 @@ public class Rental extends Thread {
     }
 
     private void generateBill() {
-        // Relativna putanja do foldera za račune
         Properties properties = Util.loadProperties();
         String billsPath = Paths.get(properties.getProperty("BILL_FILE_PATH")).toString();
 
-        // Kreiranje direktorijuma ako ne postoji
         File directory = new File(billsPath);
         if (!directory.exists()) {
             directory.mkdirs();
         }
 
-        // Generisanje imena fajla
         String fileName = "bill_" + vehicleID + "_" + userName + ".txt";
         File billFile = new File(directory, fileName);
 
-        // Pisanje u fajl
         try (FileWriter writer = new FileWriter(billFile)) {
             writer.write("********** Račun za Rentanje **********\n");
             writer.write("ID vozila: " + vehicleID + "\n");

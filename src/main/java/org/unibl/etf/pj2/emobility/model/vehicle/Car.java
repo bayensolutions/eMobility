@@ -2,7 +2,7 @@ package org.unibl.etf.pj2.emobility.model.vehicle;
 
 import java.time.LocalDate;
 
-public class Car extends Vehicle implements IMultiPassengerCarrier {
+public class Car extends Vehicle implements IMultiPassengerCarrier, IDrivable, ICar {
     private String dateOfAcquisition;
     private String description;
     //private int numberOfPassengers;
@@ -35,6 +35,11 @@ public class Car extends Vehicle implements IMultiPassengerCarrier {
                 "dateOfAcquisition=" + dateOfAcquisition +
                 ", description='" + description + '\'' +
                 "} " + super.toString();
+    }
+
+    @Override
+    public double getRepairCoefficient() {
+        return 0.07;
     }
 
     /*

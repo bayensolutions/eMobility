@@ -1,6 +1,6 @@
 package org.unibl.etf.pj2.emobility.model.vehicle;
 
-public class Scooter extends Vehicle {
+public class Scooter extends Vehicle implements IScooter {
     private int maximumSpeed;
 
     public Scooter(String id, String producer, String model, double purchasePrice, int currentBatteryLevel, int maximumSpeed) {
@@ -17,6 +17,11 @@ public class Scooter extends Vehicle {
         return "Scooter{" +
                 "maximumSpeed=" + maximumSpeed +
                 "} " + super.toString();
+    }
+
+    @Override
+    public double getRepairCoefficient() {
+        return 0.02;
     }
 
     public void setMaximumSpeed(int maximumSpeed) {

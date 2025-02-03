@@ -51,5 +51,33 @@ public class ResultsTableRowData {
     public double getTotalRepair() {
         return totalRepair.get();
     }
+
+    public SimpleStringProperty dateProperty() {
+        return date;
+    }
+
+    public SimpleDoubleProperty totalIncomeProperty() {
+        return totalIncome;
+    }
+
+    public SimpleDoubleProperty totalDiscountProperty() {
+        return totalDiscount;
+    }
+
+    public SimpleDoubleProperty totalPromotionsProperty() {
+        return totalPromotions;
+    }
+
+    public SimpleDoubleProperty totalDrivesProperty() {
+        return totalDrives;
+    }
+
+    public SimpleDoubleProperty totalMaintainProperty() {
+        return totalMaintain;
+    }
+
+    public SimpleDoubleProperty totalRepairProperty() {
+        return totalRepair;
+    }
 }
 

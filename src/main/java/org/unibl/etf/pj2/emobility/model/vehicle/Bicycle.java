@@ -1,6 +1,6 @@
 package org.unibl.etf.pj2.emobility.model.vehicle;
 
-public class Bicycle extends Vehicle {
+public class Bicycle extends Vehicle implements IBicycle {
     private int range;
 
     public Bicycle(String id, String producer, String model, double purchasePrice, int currentBatteryLevel, int range) {
@@ -21,5 +21,10 @@ public class Bicycle extends Vehicle {
         return "Bicycle{" +
                 "range=" + range +
                 "} " + super.toString();
+    }
+
+    @Override
+    public double getRepairCoefficient() {
+        return 0.04;
     }
 }
