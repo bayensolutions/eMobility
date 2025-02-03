@@ -45,7 +45,7 @@ public class Rental extends Thread {
         }
 
         try {
-            Thread.sleep(1000); // Simulacija kretanja vozila (1 sekunda između pozicija)
+            Thread.sleep(100); // Simulacija kretanja vozila (1 sekunda između pozicija)
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

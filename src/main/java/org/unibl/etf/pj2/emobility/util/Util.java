@@ -1,6 +1,7 @@
 package org.unibl.etf.pj2.emobility.util;
 
 import org.unibl.etf.pj2.emobility.HelloApplication;
+import org.unibl.etf.pj2.emobility.HelloController;
 import org.unibl.etf.pj2.emobility.model.rental.Coordinate;
 import org.unibl.etf.pj2.emobility.model.rental.Rental;
 import org.unibl.etf.pj2.emobility.model.vehicle.*;
@@ -60,7 +61,7 @@ public class Util {
         }
         return vehicles;
     }
-
+/*
     public static List<Rental> loadRentals(String fileName) {
         List<Rental> rentals = new ArrayList<>();
         try {
@@ -92,8 +93,70 @@ public class Util {
         }
         return rentals;
     }
+*/
 
-    public static List<Rental> sortRentals(List<Rental> rentals){
+    public static List<Rental> loadRentals(String fileName) {
+        List<Rental> rentals = new ArrayList<>();
+        Set<String> usedVehicles = new HashSet<>();
+        try {
+            List<String> lines = Files.readAllLines(Path.of(fileName));
+            for (int i = 1; i < lines.size(); i++) { // Počinje od 1 da preskoči zaglavlje
+                String line = lines.get(i);
+                String[] parts = line.split(",");
+
+                if (parts.length < 10) { // Provjera da li linija ima dovoljno podataka
+                    System.out.println("[Greška] Nedovoljno podataka u liniji: " + line);
+                    continue;
+                }
+
+                String date = parts[0];
+                String userName = parts[1];
+                String id = parts[2];
+
+                // Provjera da li je vozilo već korišteno u istom terminu
+                String key = date + ":" + id;
+                if (usedVehicles.contains(key)) {
+                    System.out.println("[Upozorenje] Vozilo " + id + " je već iznajmljeno u terminu " + date + " i biće ignorisano.");
+                    continue;
+                }
+                usedVehicles.add(key);
+
+                try {
+                    int startX = Integer.parseInt(parts[3].substring(2));
+                    int startY = Integer.parseInt(parts[4].substring(0, parts[4].length() - 2));
+                    int endX = Integer.parseInt(parts[5].substring(2));
+                    int endY = Integer.parseInt(parts[6].substring(0, parts[6].length() - 2));
+
+                    // Provjera validnosti koordinata
+                    if (!isValidCoordinate(startX, startY) || !isValidCoordinate(endX, endY)) {
+                        System.out.println("[Greška] Neispravne koordinate u liniji: " + line);
+                        continue;
+                    }
+
+                    Coordinate start = new Coordinate(startX, startY);
+                    Coordinate end = new Coordinate(endX, endY);
+
+                    int duration = Integer.parseInt(parts[7]);
+                    boolean failure = "da".equals(parts[8]);
+                    boolean discount = "da".equals(parts[9].replace("\"", "")); // Uklanja nevalidne navodnike
+
+                    rentals.add(new Rental(id, date, userName, start, end, duration, failure, discount));
+                } catch (NumberFormatException e) {
+                    System.out.println("[Greška] Pogrešan format brojeva u liniji: " + line);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return rentals;
+    }
+
+    private static boolean isValidCoordinate(int x, int y) {
+        return x >= 0 && x < HelloController.SIZE && y >= 0 && y < HelloController.SIZE;
+    }
+
+
+    public static List<Rental> sortRentals(List<Rental> rentals) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy HH:mm");
         List<Rental> sortedRentals = rentals.stream().sorted((r1, r2) -> {
             LocalDateTime dt1 = LocalDateTime.parse(r1.getDateTime().replace("\"", "").trim(), formatter);
@@ -224,11 +287,9 @@ public class Util {
 
                     if (vehicle instanceof ICar) {
                         repairCoefficient = ((ICar) vehicle).getRepairCoefficient();
-                    }
-                    else if (vehicle instanceof IBicycle) {
+                    } else if (vehicle instanceof IBicycle) {
                         repairCoefficient = ((IBicycle) vehicle).getRepairCoefficient();
-                    }
-                    else if (vehicle instanceof IScooter) {
+                    } else if (vehicle instanceof IScooter) {
                         repairCoefficient = ((IScooter) vehicle).getRepairCoefficient();
                     }
 
@@ -238,7 +299,5 @@ public class Util {
         }
         return totalRepairCosts;
     }
-
-
 
 }

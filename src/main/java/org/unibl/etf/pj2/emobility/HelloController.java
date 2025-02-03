@@ -41,7 +41,7 @@ public class HelloController {
     @FXML
     private GridPane gridPane;
 
-    private static final int SIZE = 20; // Veličina grida
+    public static final int SIZE = 20; // Veličina grida
     private TextField[][] cells = new TextField[SIZE][SIZE];
     private Map<String, int[]> vehiclePositions = new ConcurrentHashMap<>();
     private final ExecutorService executor = Executors.newFixedThreadPool(10);
@@ -67,15 +67,7 @@ public class HelloController {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy HH:mm");
 
-        List<Rental> sortedRentals = Util.loadRentals(HelloApplication.rentalsFileName).stream()
-                .sorted((r1, r2) -> {
-                    LocalDateTime dt1 = LocalDateTime.parse(r1.getDateTime().replace("\"", "").trim(), formatter);
-                    LocalDateTime dt2 = LocalDateTime.parse(r2.getDateTime().replace("\"", "").trim(), formatter);
-                    return dt1.compareTo(dt2);
-                })
-                .distinct()
-                .collect(Collectors.toList());
-
+        List<Rental> sortedRentals = HelloApplication.sortedRentals;
 
         new Thread(() -> {
             LocalDateTime previousDateTime = null;

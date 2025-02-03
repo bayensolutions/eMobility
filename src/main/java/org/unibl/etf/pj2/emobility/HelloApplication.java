@@ -28,6 +28,8 @@ public class HelloApplication extends Application {
     public static List<Bicycle> bicycles=new ArrayList<>();
     public static List<Scooter> scooters=new ArrayList<>();
 
+    public static List<Rental> sortedRentals;
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/fxml/hello-view.fxml"));
@@ -40,14 +42,7 @@ public class HelloApplication extends Application {
 
     public static void main(String[] args) {
         Util.loadVehicles(vehiclesFileName);
-
-        List<Rental> rentals=Util.loadRentals(rentalsFileName);
-        List<Rental> sortedRentals=Util.sortRentals(rentals);
-
-        System.out.println("RENTALS");
-        System.out.println(rentals);
-        System.out.println("SORTED RENTALS");
-        System.out.println(sortedRentals);
+        sortedRentals=Util.sortRentals(Util.loadRentals(rentalsFileName));
 
         launch();
 
@@ -60,13 +55,5 @@ public class HelloApplication extends Application {
         */
 
 
-        System.out.println(Util.loadRentals(rentalsFileName));
-        System.out.println(Util.loadVehicles(vehiclesFileName));
-        System.out.println("SUMA: "+Util.calculateTotalIncome(sortedRentals));
-        System.out.println("SUMA POPUSTI: "+Util.calculateTotalDiscount(sortedRentals));
-        System.out.println("SUMA PROMO POPUSTI: "+Util.calculateTotalPromotions(sortedRentals));
-        System.out.println("UKUPNO VOZNJI U UZEM DIJELU GRADA: "+Util.countCityRides(sortedRentals));
-        System.out.println("UKUPNO ZA POPRAVKU KVAROVA: "+Util.calculateTotalRepairCosts(sortedRentals,Util.loadVehicles(vehiclesFileName)));
-        System.out.println("A"+sortedRentals.get(0).getDateTime()+"A");
     }
 }

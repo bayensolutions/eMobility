@@ -60,8 +60,7 @@ public class ReportsController {
     private TableColumn<ResultsTableRowData, Double> totalRepairColumn;
 
     public void initialize() {
-        List<Rental> rentals = Util.sortRentals(Util.loadRentals(HelloApplication.rentalsFileName));
-        System.out.println("Broj učitanih rentanja: " + rentals.size());
+        List<Rental> rentals = HelloApplication.sortedRentals;
 
         double totalIncomeValue = Util.calculateTotalIncome(rentals);
         double totalDiscountValue = Util.calculateTotalDiscount(rentals);
@@ -88,8 +87,6 @@ public class ReportsController {
                             return (dateTime != null && dateTime.contains(" ")) ? dateTime.trim().split(" ")[0] : "NEPOZNAT DATUM";
                         },
                         Collectors.collectingAndThen(Collectors.toList(), list -> {
-                            System.out.println("Obrađujem datum: " + list.get(0).getDateTime());
-                            System.out.println(list);
 
                             double totalIncome = Util.calculateTotalIncome(list);
                             double totalDiscount = Util.calculateTotalDiscount(list);

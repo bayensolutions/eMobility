@@ -19,109 +19,109 @@
                <children>
                   <VBox>
                      <children>
-                        <HBox spacing="10.0">
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
                            <children>
-                              <Label text="Ukupan prihod:">
+                              <Label alignment="CENTER_LEFT" text="Ukupan prihod:">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="totalIncome" />
+                              <Label fx:id="totalIncome" alignment="CENTER_LEFT" />
                            </children>
                            <VBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </VBox.margin>
                         </HBox>
-                        <HBox spacing="10.0">
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
                            <children>
-                              <Label text="Ukupan popust:">
+                              <Label alignment="CENTER_LEFT" text="Ukupan popust:">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="totalDiscount" />
+                              <Label fx:id="totalDiscount" alignment="CENTER_LEFT" />
                            </children>
                            <VBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </VBox.margin>
                         </HBox>
-                        <HBox spacing="10.0">
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
                            <children>
-                              <Label text="Ukupno promocije:">
+                              <Label alignment="CENTER_LEFT" text="Ukupno promocije:">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="totalPromotions" />
+                              <Label fx:id="totalPromotions" alignment="CENTER_LEFT" />
                            </children>
                            <VBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </VBox.margin>
                         </HBox>
-                        <HBox spacing="10.0">
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
                            <children>
-                              <Label text="Ukupan iznos svih vožnji:">
+                              <Label alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="149.0" text="Ukupan iznos svih vožnji:">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </HBox.margin>
                               </Label>
-                              <Label fx:id="totalDrives" />
+                              <Label fx:id="totalDrives" alignment="CENTER_LEFT" />
                            </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
                         </HBox>
-                        <HBox spacing="10.0">
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
                            <children>
-                              <Label text="Ukupan iznos za održavanje:">
+                              <Label alignment="CENTER_LEFT" text="Ukupan iznos za održavanje:">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </HBox.margin>
                               </Label>
-                              <Label fx:id="totalMaintain" />
+                              <Label fx:id="totalMaintain" alignment="CENTER_LEFT" />
                            </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
                         </HBox>
-                        <HBox spacing="10.0">
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
                            <children>
-                              <Label text="Ukupan iznos za popravke kvarova:">
+                              <Label alignment="CENTER_LEFT" text="Ukupan iznos za popravke kvarova:">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </HBox.margin>
                               </Label>
-                              <Label fx:id="totalRepair" />
+                              <Label fx:id="totalRepair" alignment="CENTER_LEFT" />
                            </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
                         </HBox>
-                        <HBox spacing="10.0">
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
                            <children>
-                              <Label text="Ukupni troškovi kompanije:">
+                              <Label alignment="CENTER_LEFT" text="Ukupni troškovi kompanije:">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </HBox.margin>
                               </Label>
-                              <Label fx:id="totalCosts" />
+                              <Label fx:id="totalCosts" alignment="CENTER_LEFT" />
                            </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
                         </HBox>
-                        <HBox spacing="10.0">
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
                            <children>
-                              <Label text="Ukupni porez:">
+                              <Label alignment="CENTER_LEFT" text="Ukupni porez:">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </HBox.margin>
                               </Label>
-                              <Label fx:id="totalTax" />
+                              <Label fx:id="totalTax" alignment="CENTER_LEFT" />
                            </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
                         </HBox>
                      </children>
                   </VBox>
@@ -132,7 +132,6 @@
       <Tab text="Dnevni izvještaj">
          <content>
             <VBox>
-               <!-- TableView now inside VBox to ensure it resizes dynamically -->
                <TableView fx:id="dailyReportTable" maxHeight="Infinity" maxWidth="Infinity" VBox.vgrow="ALWAYS">
                   <columns>
                      <TableColumn fx:id="dateColumn" minWidth="120.0" text="Datum" />
